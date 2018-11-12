@@ -1,6 +1,7 @@
 package com.paritosh.recipe.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 @Entity
 public class Category {
@@ -9,7 +10,7 @@ public class Category {
     private Long id;
     private String description;
     @ManyToMany(mappedBy = "categories")
-    private Set<Recipe> recipeSet;
+    private Set<Recipe> recipeSet = new HashSet<>();
 
     public Long getId() {
         return id;

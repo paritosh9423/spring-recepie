@@ -4,7 +4,9 @@ import com.paritosh.recipe.domain.Category;
 import com.paritosh.recipe.domain.UnitOfMeasure;
 import com.paritosh.recipe.repositories.CategoryRepository;
 import com.paritosh.recipe.repositories.UnitOfMeasureRespository;
+import com.paritosh.recipe.service.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -12,25 +14,17 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
+    private final RecipeService recipeService;
 
-    private UnitOfMeasureRespository unitOfMeasureRespository;
-
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRespository unitOfMeasureRespository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRespository = unitOfMeasureRespository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
-
     @RequestMapping({"/","","index","index.html"})
-    public String getIndexPage(){
+    public String getIndexPage(Model model){
         System.out.println("abcd ------------------------------");
+        model.addAttribute("recipes",recipeService.getRecipeList());
 
-        Optional<Category> optionalCategory = categoryRepository.findByDescription("AMERICAN");
-        System.out.println(optionalCategory.get().getDescription());
-
-        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRespository.findByUom("Grams");
-        System.out.println(optionalUnitOfMeasure.get().getUom());
         return "index";
     }
 
