@@ -6,18 +6,20 @@ import com.paritosh.recipe.domain.*;
 import com.paritosh.recipe.repositories.CategoryRepository;
 import com.paritosh.recipe.repositories.RecipeRepository;
 import com.paritosh.recipe.repositories.UnitOfMeasureRespository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -32,6 +34,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipeList());
     }
@@ -81,6 +84,7 @@ try {
 
 }
     catch (Exception ex){
+    log.error("Exception occurred"+ex.getLocalizedMessage());
     throw new RuntimeException("UOM NOT FOUND");
     }
     return recipeList;
