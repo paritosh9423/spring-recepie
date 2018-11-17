@@ -9,7 +9,8 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(exclude = {"recipeSet"})//(overriding because lombok is creating hascode and bidirectional mapping is causing stackoverflow error)
 @Entity
-public class Category {
+public class Category
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
