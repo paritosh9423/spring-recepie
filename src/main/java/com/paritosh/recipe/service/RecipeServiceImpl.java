@@ -1,5 +1,8 @@
 package com.paritosh.recipe.service;
 
+import com.paritosh.recipe.backingBeans.RecipeBackingBean;
+import com.paritosh.recipe.converters.RecipeBackingBeanToRecipe;
+import com.paritosh.recipe.converters.RecipeToRecipeBackingBean;
 import com.paritosh.recipe.domain.Recipe;
 import com.paritosh.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +16,16 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeBackingBeanToRecipe recipeBackingBeanToRecipe;
+    private final RecipeToRecipeBackingBean recipeToRecipeBackingBean;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository,
+                             RecipeBackingBeanToRecipe recipeBackingBeanToRecipe,
+                             RecipeToRecipeBackingBean recipeToRecipeBackingBean) {
+
         this.recipeRepository = recipeRepository;
+        this.recipeBackingBeanToRecipe = recipeBackingBeanToRecipe;
+        this.recipeToRecipeBackingBean = recipeToRecipeBackingBean;
     }
 
     @Override
@@ -31,5 +41,15 @@ public class RecipeServiceImpl implements RecipeService {
         if(!recipeOptional.isPresent())
             throw new RuntimeException("Recipe with RecipeID : "+id+" Not Found");
         return recipeOptional.get();
+    }
+
+    @Override
+    public RecipeBackingBean saveRecipeBackingBean(RecipeBackingBean recipeBackingBean) {
+        Recipe detachedrecipe = recipeBackingBeanToRecipe.convert(recipeBackingBean);
+        Recipe savedRecipe = recipeRepository.save(detachedrecipe);
+
+        log.debug("Saved Recipe Id:= "+savedRecipe.getId());
+        return recipeToRecipeBackingBean.convert(savedRecipe);
+
     }
 }

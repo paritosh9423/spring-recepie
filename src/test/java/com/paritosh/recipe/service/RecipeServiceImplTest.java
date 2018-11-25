@@ -1,5 +1,7 @@
 package com.paritosh.recipe.service;
 
+import com.paritosh.recipe.converters.RecipeBackingBeanToRecipe;
+import com.paritosh.recipe.converters.RecipeToRecipeBackingBean;
 import com.paritosh.recipe.domain.Recipe;
 import com.paritosh.recipe.repositories.RecipeRepository;
 import org.junit.Before;
@@ -12,18 +14,23 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class RecipeServiceImplTest {
 
     RecipeServiceImpl recipeService;
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeToRecipeBackingBean recipeToRecipeBackingBean;
+    @Mock
+    RecipeBackingBeanToRecipe recipeBackingBeanToRecipe;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository,recipeBackingBeanToRecipe,recipeToRecipeBackingBean) ;
 
     }
 
