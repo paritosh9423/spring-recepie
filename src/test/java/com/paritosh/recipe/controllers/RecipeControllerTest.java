@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
-
 public class RecipeControllerTest {
     @Mock
     RecipeService recipeService;
@@ -36,7 +34,7 @@ public class RecipeControllerTest {
         Mockito.when(recipeService.findById(1L)).thenReturn(recipe);
         mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("/recipe/show"));
+                .andExpect(MockMvcResultMatchers.view().name("recipe/show"));
 
     }
 }
