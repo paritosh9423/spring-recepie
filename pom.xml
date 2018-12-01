@@ -5,6 +5,7 @@
 
     <groupId>com.paritosh</groupId>
     <artifactId>recipe</artifactId>
+
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
