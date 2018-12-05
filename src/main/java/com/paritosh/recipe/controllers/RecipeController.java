@@ -33,5 +33,10 @@ public class RecipeController {
         RecipeBackingBean savedRecipeBackingBean = recipeService.saveRecipeBackingBean(recipeBackingBean);
         return "redirect:/recipe/show/"+savedRecipeBackingBean.getId();
     }
+    @RequestMapping("recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id ,  Model model){
+        model.addAttribute("recipe",recipeService.findRecipeBackingBeanByID(Long.valueOf(id)));
+        return  "recipe/recipeForm";
+    }
 
 }

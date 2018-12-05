@@ -12,4 +12,6 @@ public interface RecipeService   {
 
     RecipeBackingBean saveRecipeBackingBean(RecipeBackingBean recipeBackingBean);
 
+    RecipeBackingBean findRecipeBackingBeanByID(Long l);
+
 }

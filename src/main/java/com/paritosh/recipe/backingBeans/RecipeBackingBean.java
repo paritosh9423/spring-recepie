@@ -27,7 +27,13 @@ public class RecipeBackingBean {
     private NotesBackingBean notes;
     private Set<CategoryBackingBean> categories = new HashSet<>();
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
 
 

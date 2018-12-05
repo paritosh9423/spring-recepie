@@ -7,6 +7,7 @@ import com.paritosh.recipe.domain.Recipe;
 import com.paritosh.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -44,6 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    @Transactional
     public RecipeBackingBean saveRecipeBackingBean(RecipeBackingBean recipeBackingBean) {
         Recipe detachedrecipe = recipeBackingBeanToRecipe.convert(recipeBackingBean);
         Recipe savedRecipe = recipeRepository.save(detachedrecipe);
@@ -51,5 +53,11 @@ public class RecipeServiceImpl implements RecipeService {
         log.debug("Saved Recipe Id:= "+savedRecipe.getId());
         return recipeToRecipeBackingBean.convert(savedRecipe);
 
+    }
+
+    @Override
+    @Transactional
+    public RecipeBackingBean findRecipeBackingBeanByID(Long l) {
+        return recipeToRecipeBackingBean.convert(findById(l));
     }
 }
