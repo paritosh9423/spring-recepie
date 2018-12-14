@@ -60,4 +60,12 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeBackingBean findRecipeBackingBeanByID(Long l) {
         return recipeToRecipeBackingBean.convert(findById(l));
     }
+
+	@Override
+	public void deleteById(Long id) {
+		recipeRepository.deleteById(id);
+		
+	}
+    
+    
 }

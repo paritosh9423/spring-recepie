@@ -13,5 +13,7 @@ public interface RecipeService   {
     RecipeBackingBean saveRecipeBackingBean(RecipeBackingBean recipeBackingBean);
 
     RecipeBackingBean findRecipeBackingBeanByID(Long l);
+    
+    public void deleteById(Long id);
 
 }

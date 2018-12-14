@@ -2,6 +2,7 @@ package com.paritosh.recipe.controllers;
 
 import com.paritosh.recipe.backingBeans.RecipeBackingBean;
 import com.paritosh.recipe.domain.Recipe;
+import com.paritosh.recipe.repositories.RecipeRepository;
 import com.paritosh.recipe.service.RecipeService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -15,6 +16,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 public class RecipeControllerTest {
     @Mock
@@ -95,5 +103,12 @@ public class RecipeControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("recipe/recipeForm"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
+    }
+    @Test
+    public void testDeleteAction() throws Exception {
+        mockMvc.perform(get("/recipe/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/"));
+         verify(recipeService, times(1)).deleteById(anyLong());
     }
 }
