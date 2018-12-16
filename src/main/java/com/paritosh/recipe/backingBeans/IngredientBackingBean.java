@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class IngredientBackingBean {
 
     private Long id;
+    private Long recipeId;
     private String description;
     private BigDecimal amount;
     private UnitOfMeasureBackingBean unitOfMeasure;

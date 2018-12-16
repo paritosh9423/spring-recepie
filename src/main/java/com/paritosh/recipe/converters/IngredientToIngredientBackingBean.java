@@ -20,6 +20,8 @@ public class IngredientToIngredientBackingBean implements Converter<Ingredient, 
             return null;
         IngredientBackingBean ingredientBackingBean = new IngredientBackingBean();
         ingredientBackingBean.setId(ingredient.getId());
+        if(ingredient.getRecipe() !=null )
+        	ingredientBackingBean.setRecipeId(ingredient.getRecipe().getId());
         ingredientBackingBean.setAmount(ingredient.getAmount());
         ingredientBackingBean.setDescription(ingredient.getDescription());
         ingredientBackingBean.setUnitOfMeasure(unitOfMeasureToUnitOfMeasureBackingBean.convert(ingredient.getUnitOfMeasure()));
