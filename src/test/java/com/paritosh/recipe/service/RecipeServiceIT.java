@@ -27,6 +27,8 @@ public class RecipeServiceIT {
     RecipeBackingBeanToRecipe recipeBackingBeanToRecipe;
     @Autowired
     RecipeToRecipeBackingBean recipeToRecipeBackingBean;
+    @Autowired
+    UnitOfMeasureService unitOfMeasureService;
 
     @Transactional
     @Test

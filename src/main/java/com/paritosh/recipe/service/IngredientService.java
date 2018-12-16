@@ -6,4 +6,5 @@ public interface IngredientService {
 
 	IngredientBackingBean findByRecipeIdAndIngredientId(Long recipeId , Long ingredientId);
 	
+	IngredientBackingBean saveIngredientBackingBean(IngredientBackingBean ingredientBackingBean);
 }
