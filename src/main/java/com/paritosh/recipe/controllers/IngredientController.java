@@ -69,6 +69,15 @@ public class IngredientController {
 			return "redirect:/recipe/"+ingredientBackingBeanSaved.getRecipeId()+"/ingredient/"+ingredientBackingBeanSaved.getId()+"/show";
 	}
 	
+	@GetMapping
+	@RequestMapping("recipe/{recipeId}/ingredient/{id}/delete")
+	public String deleteIngredient(@PathVariable String recipeId,
+			@PathVariable String id,
+			Model model) {
+		System.out.println("bbbbbbbbbbbbbbbbbbbb----------------------------------------------");
+		return null;
+	}
+	
 	
 	
 	
