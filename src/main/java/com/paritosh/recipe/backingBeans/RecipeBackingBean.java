@@ -23,6 +23,7 @@ public class RecipeBackingBean {
     private String url;
     private String directions;
     private Set<IngredientBackingBean> ingredients = new HashSet<>();
+    private Byte[] image;
     private Difficulty difficulty;
     private NotesBackingBean notes;
     private Set<CategoryBackingBean> categories = new HashSet<>();

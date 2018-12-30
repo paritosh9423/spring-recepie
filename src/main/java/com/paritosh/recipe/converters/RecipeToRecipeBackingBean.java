@@ -35,6 +35,7 @@ public class RecipeToRecipeBackingBean implements Converter<Recipe , RecipeBacki
         recipeBackingBean.setServings(recipe.getServings());
         recipeBackingBean.setSource(recipe.getSource());
         recipeBackingBean.setUrl(recipe.getUrl());
+        recipeBackingBean.setImage(recipe.getImage());
         recipeBackingBean.setNotes(notesToNotesBackingBean.convert(recipe.getNotes()));
 
         if(recipe.getIngredients()!=null && recipe.getIngredients().size()>0){
